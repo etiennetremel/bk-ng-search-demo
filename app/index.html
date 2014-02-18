@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Booking App</title>
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+  <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/app.css"/>
+
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-sanitize.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body ng-controller="AppCtrl">
+
+  <div class="container">
+    <div id="header">
+      <h1 class="text-center">Popular destinations</h1>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 form-inline">
+        <div class="form-group">
+          <input type="text" ng-model="query" class="form-control" placeholder="Search for..." />
+          <button id="clear-button" class="btn btn-default" ng-click="clearField()">Clear</button>
+        </div>
+      </div>
+      <div class="col-md-6 form-inline text-right">
+        <div class="form-group">
+          <select ng-model="sort" class="form-control">
+            <option value="name" select>Name</option>
+            <option value="count">Count</option>
+          </select>
+        </div>
+        <div class="checkbox">
+          <input id="order-asc" type="radio" ng-model="order" value="false" /> ASC
+          <input id="order-desc" type="radio" ng-model="order" value="true" /> DESC
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row" id="list">
+      <div id="loader" ng-show="loading"><img src="img/loader-small.gif" border="0" alt="Loading..." /></div>
+      <div class="col-md-4" ng-repeat="cityGroup in cities | filter:query | orderBy:sort:order | columns:3">
+        <ul class="list">
+          <li class="city" ng-repeat="city in cityGroup" ng-click="view(city)" ng-cloak>{{city.name}} ({{city.count}})</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row" id="details" ng-cloak>
+      <div class="placeholder" class="col-md-12" ng-hide="cityDetails">
+        <p class="text-center"><em>- Select a city -</em></p>
+      </div>
+      <div class="col-md-12" ng-show="cityDetails">
+        <h3 id="details-title">{{cityDetails.name}} <small>{{cityDetails.count}} hotels</small></h3>
+        <div id="details-content" ng-bind-html="cityDetails.content"></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

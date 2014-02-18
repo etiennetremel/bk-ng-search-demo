@@ -1,0 +1,30 @@
+.container {
+  width: 600px;
+}
+#header {
+  margin: 40px 0;
+}
+#loader {
+  padding: 50px;
+  text-align: center;
+}
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.list .city {
+  cursor: pointer;
+}
+.list .city:hover {
+  font-weight: bold;
+}
+#details .placeholder {
+  padding: 50px;
+}
+hr {
+  margin: 20px 0;
+  height: 1px;
+  border: 0;
+  background: #ddd;
+}
